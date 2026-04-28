@@ -1,0 +1,40 @@
+CREATE TABLE CART_ITEMS (
+    CartItemID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    ProductID INT,
+    Quantity INT,
+    AddedDate DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+ALTER TABLE CART_ITEMS ADD UNIQUE (UserID, ProductID);
+
+ALTER TABLE CART_ITEMS
+ADD CONSTRAINT chk_quantity CHECK (Quantity > 0);
+
+INSERT INTO
+    CART_ITEMS (UserID, ProductID, Quantity)
+VALUES (1, 101, 1)
+ON DUPLICATE KEY UPDATE
+    Quantity = Quantity +
+VALUES (Quantity);
+
+SELECT ProductID, Quantity, AddedDate
+FROM CART_ITEMS
+WHERE
+    UserID = 1;
+
+UPDATE CART_ITEMS
+SET
+    Quantity = 5
+WHERE
+    UserID = 1
+    AND ProductID = 101
+    AND 5 > 0;
+
+DELETE FROM CART_ITEMS
+WHERE
+    UserID = 1
+    AND ProductID = 101
+    AND 0 <= 0;
+
+DELETE FROM CART_ITEMS WHERE UserID = 1 AND ProductID = 101;

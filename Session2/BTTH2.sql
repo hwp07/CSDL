@@ -1,0 +1,3 @@
+ALTER TABLE Persons ADD phone VARCHAR(20);
+
+ALTER TABLE Persons DROP COLUMN city;
