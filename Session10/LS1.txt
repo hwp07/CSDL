@@ -1,0 +1,21 @@
+SELECT khi chưa có INDEX:
+    type: ALL → quét toàn bảng
+    rows: ~500000
+=>Vì không có index nên DB phải duyệt hết bảng => chậm (~2-3s)
+
+SELECT khi có INDEX
+    type: ref hoặc const
+    key: idx_phone
+    rows: ~1
+
+Tốc độ: Giảm từ ~3s => ~0.05s (rất nhanh)
+
+
+INSERT khi chưa có INDEX => nhanh vì chỉ thêm dữ liệu
+
+INSERT khi có INDEX => chậm hơn vì:
+    phải cập nhật thêm cấu trúc index (B-Tree)
+    tốn CPU + IO
+
+
+=> Việc tạo index trên cột Phone giúp cải thiện đáng kể hiệu năng truy vấn (từ vài giây xuống mili-giây), đặc biệt phù hợp với hệ thống bệnh viện nơi thao tác tra cứu diễn ra thường xuyên.Tuy nhiên, INDEX làm tăng chi phí ghi do hệ thống phải duy trì cấu trúc chỉ mục. Trong bài toán này, do tần suất đọc cao hơn ghi, việc đánh INDEX là hoàn toàn hợp lý và cần thiết
