@@ -19,6 +19,8 @@ CREATE TABLE Vitals_Logs (
     FOREIGN KEY (Patient_ID) REFERENCES Patients(Patient_ID)
 );
 
+
+
 INSERT INTO Patients (Patient_ID, Full_Name) 
 VALUES
 ('P001', 'Nguyen Van A'),
