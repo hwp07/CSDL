@@ -55,8 +55,7 @@ USE RikkeiClinicDB;
 --     Tong tien sau giam gia
 
 -- CREATE PROCEDURE
-DELIMITER /
-/
+DELIMITER / /
 
 CREATE PROCEDURE ProcessPrescription(
     IN p_patient_id INT,
@@ -108,8 +107,7 @@ BEGIN
 
             -- APPLY DISCOUNT
             IF p_discount_code = 'NV-RIKKEI' THEN
-                SET v_final_amount =
-                    v_total_amount * 0.5;
+                SET v_final_amount = v_total_amount * 0.5;
 
             ELSE
                 SET v_final_amount =
@@ -123,8 +121,7 @@ BEGIN
 
             -- UPDATE PATIENT DEBT
             UPDATE Patient_Invoices
-            SET total_due =
-                total_due + v_final_amount
+            SET total_due = total_due + v_final_amount
             WHERE patient_id = p_patient_id;
 
             -- SUCCESS
@@ -133,9 +130,7 @@ BEGIN
             COMMIT;
         END IF;
     END IF;
-END
-/
-/
+END //
 
 DELIMITER;
 

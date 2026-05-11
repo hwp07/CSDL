@@ -117,8 +117,6 @@ BEGIN
     ELSE
         SET p_rank = 'Yếu';
     END IF;
-
-
 END //
 
 DELIMITER ;
